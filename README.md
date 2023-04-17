@@ -23,5 +23,6 @@ Please follow this steps in order to run this.
 TBD: 
 1. finish ansi playbook
 2. convert to helm chart
+3. Add Jenkinsfile
 
 
