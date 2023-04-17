@@ -1,0 +1,5 @@
+webserver: apache
+webserver_config_file: /etc/httpd/conf/httpd.conf
+config_line: Listen 8090
+webserver_root: /var/www/html
+

@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadate:
+  name: "ansi-job"
+  labels:
+    name: "ansi"
+spec:
+  backoffLimit: 1
+  template:
+    spec:
+      containers:
+      - name: "ansi"
+      # TODO:
+        image: sk123456789/ansi:v1
+        command: ["ansible-playbook", "playbook.yml", "--extra-vars", "@config.yml"]
+      restartPolicy: Never
+      

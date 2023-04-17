@@ -1,0 +1,40 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Install webserver
+      yum:
+        name: "{{ webserver }}"
+        state: present
+
+    - name: Configure webserver
+      lineinfile:
+        dest: "{{ webserver_config_file }}"
+        line: "{{ config_line }}"
+      notify: Restart webserver
+
+    - name: Serve static page
+      copy:
+        content: |
+          <html>
+            <body>
+              <h1>Welcome to Toka</h1>
+            </body>
+          </html>
+        dest: "{{ webserver_root }}/index.html"
+  
+    - name: Test the webserver
+      uri:
+        url: http://localhost:8090
+        method: GET
+      register: results
+    - debug:
+        var: results.json.value
+  
+  handlers:
+    - name: Restart webserver
+      service:
+        name: "{{ webserver }}"
+        state: restarted
+
+# TODO: add restapi test

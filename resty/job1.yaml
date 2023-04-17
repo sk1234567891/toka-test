@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: "ansi-job"
+  labels:
+    name: "ansi"
+spec:
+  backoffLimit: 1
+  template:
+    spec:
+      containers:
+      - name: "ansi"
+        image: "ubuntu"
+        command: ["/bin/sh", "-c", "echo $hi"]
+        env:
+        - name: "hi"
+          value: "bla"
+      restartPolicy: Never
